@@ -7,21 +7,19 @@
 
   <!-- Auth Links -->
   <div class="flex items-center gap-4 text-sm">
-    @auth
-      <span class="text-gray-700">
-        Welcome, <span class="font-semibold">{{ Auth::user()->name }}</span>
-      </span>
+    @auth('admin')
+        <span class="text-gray-700">
+            <span class="font-semibold">{{ Auth::guard('admin')->user()->email }}</span>
+        </span>
 
-      <a href="#" class="text-indigo-600 hover:underline transition">Profile</a>
-
-      <form method="POST" action="#" class="inline">
-        @csrf
-        <button type="submit" class="text-red-600 hover:underline transition">Logout</button>
-      </form>
+        <form method="POST" action="{{route('admin.logout')}}" class="inline">
+            @csrf
+            <button type="submit" class="text-red-600 hover:underline transition">Logout</button>
+        </form>
     @else
-      <a href="#" class="text-indigo-600 hover:underline transition">Login</a>
-      <a href="#" class="text-indigo-600 hover:underline transition">Register</a>
+        <a href="{{ route('admin.login') }}" class="text-indigo-600 hover:underline transition">Login</a>
     @endauth
   </div>
+
 
 </header>
