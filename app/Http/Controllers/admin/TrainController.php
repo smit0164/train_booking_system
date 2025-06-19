@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\DB;
 class TrainController extends Controller
 {
     public function index(){
-        $trainInfo=Train::with(['Train_Schedule_per_stations.station','trains_class','route'])->get();
+        $trainInfo=Train::all();
         return view('admin.trains.index',['trainInfo'=>$trainInfo]);
     }
     public function create(){
-        $routes=Route::with('stations')->get();
+        $routes=Route::all();
         return view('admin.trains.create',['routes'=>$routes]);
     }
 

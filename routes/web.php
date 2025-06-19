@@ -11,6 +11,8 @@ use App\Http\Controllers\UserDashboardController ;
 
 Route::get('/',[UserDashboardController::class,'index'])->name('user.dashboard')->middleware('auth:user');
 
+Route::get('/book/{train}',[UserDashboardController::class,'viewtrainBookingPage'])->name('user.view.train.book')->middleware('auth:user');
+
 Route::get('register',[UserAuthController::class,'showRegisterForm'])->name('user.register')->middleware('guest:user');
 Route::post('register',[UserAuthController::class,'register'])->middleware('guest:user');
 Route::get('login',[UserAuthController::class,'showLoginForm'])->name('user.login')->middleware('guest:user');
