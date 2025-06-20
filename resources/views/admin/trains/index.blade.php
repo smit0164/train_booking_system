@@ -8,7 +8,7 @@
         <h2 class="text-2xl font-bold text-gray-800">Train Information</h2>
         <a href="{{ route('admin.train_info.create') }}"
            class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 transition duration-200">
-            Add Train
+           + Add Train
         </a>
     </div>
 

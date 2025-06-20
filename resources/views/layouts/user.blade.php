@@ -16,12 +16,12 @@
             </a>
 
             <!-- Search Box -->
-           <form method="GET" action="" class="relative w-full max-w-md mx-auto md:mx-0">
+           <form method="GET" action="{{route('user.search')}}" class="relative w-full max-w-md mx-auto md:mx-0">
             <label for="search" class="sr-only">Search</label>
             <input
                 type="text"
+                id="search-input" 
                 name="query"
-                id="search"
                 placeholder="Search By Train name,code,..."
                 autofocus
                 class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"

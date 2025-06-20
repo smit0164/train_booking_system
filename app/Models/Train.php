@@ -19,14 +19,14 @@ class Train extends Model
         'end-time',
         'date'
     ];
-//    public static function boot()
-//     {
-//        parent::boot();
-//        static::deleting(function ($model) {
-//             $model->Train_Schedule_per_stations()->delete();
-//             $model->trains_class()->delete();
-//         });
-//     }
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'code' => $this->code,
+             'route_ids' => $this->routes->pluck('id')->toArray(),
+        ];
+    }
 
     public function route(){
          return $this->belongsTo(Route::class,'route-id');

@@ -25,4 +25,8 @@ class Stationinfo extends Model
     {
           return $this->hasMany(Train_Schedule_per_station::class,'station_id');
     }
+    public function route()
+    {
+        return $this->belongsToMany(Route::class, 'route_stops','route_id','station_id')->withPivot('orderOfstations','created_at')->orderByPivot('orderOfstations', 'asc');
+    }
 }

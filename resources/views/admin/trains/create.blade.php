@@ -74,7 +74,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($routes as $route)
                 <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition routecard" data-route-id="{{$route->id}}" >
-                    <h2 class="text-xl font-bold text-indigo-600 mb-2">{{ $route->name }}</h2>
+                    <h2 class="text-sm font-bold text-indigo-600 mb-2">{{ $route->name }}</h2>
                     <h3 class="text-sm text-gray-500 mb-4">Total Distance: {{ $route->total_distances }} km</h3>
 
                     <div class="space-y-1">

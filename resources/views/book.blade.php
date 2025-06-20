@@ -13,7 +13,7 @@
       <p><strong>End Time:</strong> {{ \Carbon\Carbon::parse($train['end-time'])->format('h:i A') ?? 'N/A' }}</p>
     </div>
 
-    <form action="" method="POST" class="space-y-6">
+    <form action="" method="POST" class="space-y-6" id="bookform">
       @csrf
 
       <p class="font-semibold text-gray-700 mb-2">Select Classes and Number of Seats</p>
@@ -21,13 +21,13 @@
       @foreach ($train->trains_class as $class)
         <div class="flex items-center space-x-4">
           <label class="flex-1 text-gray-800">
-            <input type="checkbox" name="{{$class->name}}" value="0" class="mr-2" data-class-id="{{$class->id}}">
+            <input type="checkbox" value="{{$class->name}}" class="checkbox mr-2" data-class-id="{{$class->id}}" >
             {{ $class->name }} (Available: {{ $class->available_count }})
           </label>
           <input
             type="number"
             id="count-{{$class->id}}"
-            name="count-{{$class->name}}"
+            data-class-name="{{$class->name}}"
             min="1"
             max="{{ $class->available_count }}"
             disabled
@@ -35,7 +35,7 @@
           />
         </div>
       @endforeach
-
+      <input type="hidden" name="class_info" id="class-info-value"/>
       <button type="submit"
         class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition">
         Book Now
@@ -43,14 +43,13 @@
     </form>
 
 <script>
-  // Enable/disable count input based on checkbox
   document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
     checkbox.addEventListener('change', function(e) {
         let currentElement=e.target;
         let id=currentElement.getAttribute('data-class-id');
         let inputElement=document.getElementById(`count-${id}`);
         if(currentElement.checked){
-          inputElement.disabled = false; // This enables the input
+          inputElement.disabled = false; 
           inputElement.value=1;
           inputElement.focus();
         }else{
@@ -58,9 +57,28 @@
           inputElement.value="";
           inputElement.blur();
         }
-        console.log(inputElement);
   });
 })
+
+let form=document.getElementById('bookform');
+const hidden = document.getElementById('class-info-value');
+const className = {};
+form.addEventListener('submit',function(event){
+    event.preventDefault();
+    let elements=document.querySelectorAll('.checkbox');
+    elements.forEach((element)=>{
+          if(element.checked){
+              let id=element.getAttribute('data-class-id');
+              let el=document.getElementById(`count-${id}`);
+              let class_name=element.value;
+              let class_count=el.value;
+               className[class_name] = class_count;
+          }
+    })
+    const json = JSON.stringify(className);
+    hidden.value = json;
+    form.submit();
+});
 </script>
 
   </div>

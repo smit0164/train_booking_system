@@ -8,10 +8,13 @@ use App\Http\Controllers\admin\TrainController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\UserDashboardController ;
-
+use App\Http\Controllers\SearchController;
 Route::get('/',[UserDashboardController::class,'index'])->name('user.dashboard')->middleware('auth:user');
+Route::get('user/{user}/tickets',[UserDashboardController::class,'showTickets'])->name('user.ticket')->middleware('auth:user');
+Route::get('book/{train}',[UserDashboardController::class,'viewtrainBookingPage'])->name('user.view.train.book')->middleware('auth:user');
+Route::post('book/{train}',[UserDashboardController::class,'trainBooking']);
+Route::get('/search', [SearchController::class, 'search'])->name('user.search');
 
-Route::get('/book/{train}',[UserDashboardController::class,'viewtrainBookingPage'])->name('user.view.train.book')->middleware('auth:user');
 
 Route::get('register',[UserAuthController::class,'showRegisterForm'])->name('user.register')->middleware('guest:user');
 Route::post('register',[UserAuthController::class,'register'])->middleware('guest:user');

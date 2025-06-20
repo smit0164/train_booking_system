@@ -18,4 +18,7 @@ class Book extends Model
     public function train(){
         return $this->belongsTo(Train::class,'train_id');
     }
+    public function bookClasses(){
+        return $this->hasMany(BookTrainClass::class,'book_id','id');
+    }
 }
