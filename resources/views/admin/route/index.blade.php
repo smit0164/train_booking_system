@@ -70,6 +70,7 @@
         @endforelse
       </tbody>
     </table>
+    {{ $route_stations->links() }}
   </div>
 </div>
 @endsection

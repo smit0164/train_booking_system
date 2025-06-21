@@ -119,7 +119,9 @@
                     </div>
                 @endif
             </div>
+            
         </div>
     @endforeach
+    {{$trainInfo->links()}}
 </div>
 @endsection

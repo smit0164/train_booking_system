@@ -19,7 +19,7 @@ class RouteController extends Controller
     //         $q->where('stations_info.total_no_platforms', 10);
     //     })
     //     ->get();
-         $route_stations=Route::with('stations')->get();
+        $route_stations=Route::cursorPaginate(5);
        return view('admin.route.index',['route_stations'=>$route_stations]);
 
     }

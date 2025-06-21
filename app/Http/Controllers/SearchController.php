@@ -8,15 +8,22 @@ use Illuminate\Support\Facades\DB;
 class SearchController extends Controller
 {
     public function search(Request $request){
-        $query = $request->input('query');
-        $startStationId=$request->input('startStationId') ?? null;
-        $endStationId=$request->input('endStationId') ?? null;
-        
         if($request->has('query')){
-            $trains=Train::search($query)->get();
-        }else{
+              $query = $request->input('query');
+            if(empty($query)){
+                $trains=Train::search()->get();
+            }else{
+                 $trains=Train::search($query)->get();
+            }
+           
+        }else if($request->has('startStationId') || $request->has('endStationId') ){
+            $startStationId=$request->input('startStationId');
+            $endStationId=$request->input('endStationId');
             if($startStationId && $endStationId){
                 $routeIds = DB::table('route_stops')->where('station_id', $endStationId)->orWhere('station_id',$startStationId )->pluck('route_id');
+                // $filters = collect($routeIds)->map(fn($id) => "`route-id`:$id")->implode(' OR ');
+                // $trains=Train::search('')->with(['filters' => $filters])->get();
+                // dd($trains);
                 $trains = Train::whereIn('route-id', $routeIds)->get();
             }else{
                  if($startStationId){

@@ -38,6 +38,7 @@ use Carbon\Carbon;
       @include('partials.train-card', ['trains' => $trains])
     </div>
   </div>
+  {{$trains->links()}}
   <script>
   document.getElementById('search-input').addEventListener('input', function(e) {
     e.preventDefault();

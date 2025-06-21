@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class UserDashboardController extends Controller
 {
     public function index(){
-        $trains=Train::with(['Train_Schedule_per_stations.station','trains_class','route.stations'])->get();
+        $trains=Train::with(['Train_Schedule_per_stations.station','trains_class','route.stations'])->cursorPaginate(3);
         $stations = Stationinfo::all();
         return view('dashboard',['trains'=>$trains,'stations'=>$stations]);
     }

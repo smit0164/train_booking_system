@@ -75,7 +75,7 @@ class stationinfoController extends Controller
     //  ]);
     // Stationinfo::destroy([3,4,5,6]);
    // $station_info=Stationinfo::onlyTrashed()->restore();
-     $stations_info = Stationinfo::all();
+     $stations_info = Stationinfo::orderBy('id')->cursorPaginate(5);
      $stationCount = Stationinfo::count();
     return view('admin.stations_info.index', ['station_info' => $stations_info,'stationCount'=>$stationCount]);
 

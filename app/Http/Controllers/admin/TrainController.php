@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class TrainController extends Controller
 {
     public function index(){
-        $trainInfo=Train::all();
+        $trainInfo=Train::cursorPaginate(2);
         return view('admin.trains.index',['trainInfo'=>$trainInfo]);
     }
     public function create(){

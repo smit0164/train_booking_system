@@ -60,6 +60,7 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $station_info->links() }}
     </div>
 </div>
 @endsection

@@ -22,9 +22,11 @@ class Train extends Model
     public function toSearchableArray()
     {
         return [
+            'id'=>$this->id,
             'name' => $this->name,
             'code' => $this->code,
-             'route_ids' => $this->routes->pluck('id')->toArray(),
+            'route_id' =>$this['route-id'],
+            'date'=>$this->date,
         ];
     }
 
